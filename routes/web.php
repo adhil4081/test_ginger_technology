@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\ListingController;
 use Illuminate\Foundation\Application;
@@ -9,8 +11,12 @@ use Inertia\Inertia;
 
 Route::get('/', [ListingController::class, 'index']);
 
+Route::post('/add-to-cart',[ListingController::class, 'addToCart'])->name('add_to_cart');
+
 Route::prefix('/admin')->as('admin:')->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin:dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 });
 
 // Route::get('/dashboard', function () {
