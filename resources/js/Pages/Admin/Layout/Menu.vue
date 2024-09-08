@@ -14,5 +14,7 @@
             :class="page.url.includes('categories') ? 'bg-black text-white' :'bg-white' ">Categories</Link>
         <Link :href="route('admin:products.index')" class="rounded-lg block text-center px-2 w-full"
             :class="page.url.includes('products') ? 'bg-black text-white' :'bg-white' ">Products</Link>
+        <Link :href="route('logout')" method="post"  class="bg-white rounded-lg block text-center px-2 w-full"
+            >Logout</Link>
     </div>
 </template>

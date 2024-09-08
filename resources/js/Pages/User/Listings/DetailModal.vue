@@ -17,12 +17,16 @@ function close() {
   show.value = false;
 }
 
-function addToCart(productId,productName) {
-let data={
-  id:productId,
-  name:productName,
-}
-  axios.post(route('add_to_cart',[data]))
+function addToCart(data) {
+
+  axios.post(route('add_to_cart', { 'id': data })).then((response) => {
+    window.alert(response.data)
+    show.value = false;
+
+  }).catch((err) => {
+    window.alert("Something went wrong")
+    show.value = false;
+  })
 
 }
 
@@ -40,7 +44,7 @@ defineExpose({
       <p class="mt-2 text-center">Category : {{ product?.category?.name }}</p>
       <p class="mt-2 text-center">Description : {{ product?.description }}</p>
       <div class="mt-5 w-full flex pb-5 justify-center space-x-2">
-        <button @click="addToCart(product?.id,product?.name)" class="p-2 block rounded-md border border-black">Add to cart</button>
+        <button @click="addToCart(product?.id)" class="p-2 block rounded-md border border-black">Add to cart</button>
         <button @click="close()" class="p-2 block rounded-md border border-red-500 text-red-500">close</button>
       </div>
     </Modal>
