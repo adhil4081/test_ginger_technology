@@ -7,8 +7,6 @@ const show = ref(false);
 const product = ref();
 
 function showModal(data) {
-  console.log(data.value, 'product');
-
   show.value = true;
   product.value = data;
 }

@@ -4,7 +4,6 @@
   const props = defineProps({
     products: Object
   })
-  console.log(props.products);
 
   const detailModal = ref();
 
@@ -16,13 +15,18 @@
 
   function sendDetails() {
     axios.get(route('send_detail')).then((response) => {
-      console.log(response.data);
-
+      let phoneNumber = '9061754081';
+      let message = []
+      response.data.forEach(element => {
+        let id = element?.id
+        let name = element?.name
+        message.push(' Product ID : #' + id + '-' + ' Product Name : ' + name)
+      });
+      let whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }).catch((err) => {
+      window.alert(err?.response?.data?.message)
     })
-    // let phoneNumber = '9061754081';
-    // let message = 'hiii';
-    // let whatsappUrl = `https://wa.me/${phoneNumber}/?text=${encodeURIComponent(message)}`;
-    // window.open(whatsappUrl, '_blank');
 
   }
 </script>

@@ -42,8 +42,11 @@ class ListingController extends Controller
     public function sendCartDetails()
     {
         $carts = session()->get('cart');
+        if (!$carts) {
+            throw new Exception('Cart is Empty');
+        }
         $products = Product::whereIn('id', $carts)->get();
-        session()->forget('carts');
+        session()->forget('cart');
 
         return $products;
     }
